@@ -1,9 +1,10 @@
 # Amazonbeat
 
-Welcome to Amazonbeat.
+AmazonBeat is an elastic [beat](https://www.elastic.co/products/beats) that reads data about an Amazon product and indexes the data into elasticsearch. You can configure which products can be read.
 
-Ensure that this folder is at the following location:
-`${GOPATH}/github.com/awormuth`
+To use AmazonBeat, you need a valid ASIN (Amazon Standard Identification Numbers). ASINs are unique blocks of 10 letters and/or numbers that identify items. You can find the ASIN on the item's product information page at Amazon.com and in the URL for the page. The quickest way to find your product's ASIN is to look in your browser's address bar.
+
+![alt tag](https://images-na.ssl-images-amazon.com/images/G/01/rainer/help/dp_url.jpg)
 
 ## Getting Started with Amazonbeat
 
