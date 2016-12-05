@@ -1,0 +1,5 @@
+= Amazonbeat Docs
+
+Welcome to the Amazonbeat documentation.
+
+
