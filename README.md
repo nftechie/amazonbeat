@@ -10,6 +10,7 @@ Ensure that this folder is at the following location:
 ### Requirements
 
 * [Golang](https://golang.org/dl/) 1.7
+* [Python](https://www.python.org/downloads/) 2.7
 
 ### Init Project
 To get running with Amazonbeat and also install the
