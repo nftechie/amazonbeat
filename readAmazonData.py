@@ -4,7 +4,7 @@ import requests
 from exceptions import ValueError
 from time import sleep
  
-def AmzonParser(url):
+def AmzonParser(url, asin):
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36'}
     page = requests.get(url,headers=headers)
     while True:
@@ -28,11 +28,11 @@ def AmzonParser(url):
             RAW_RATING = doc.xpath(XPATH_RATING)
  
             NAME = ' '.join(''.join(RAW_NAME).split()) if RAW_NAME else ''
-            SALE_PRICE = ' '.join(''.join(RAW_SALE_PRICE).split()).strip() if RAW_SALE_PRICE else ''
-            ORIGINAL_PRICE = ''.join(RAW_ORIGINAL_PRICE).strip() if RAW_ORIGINAL_PRICE else ''
+            SALE_PRICE = ' '.join(''.join(''.join(RAW_SALE_PRICE).replace("$", "")).split()).strip() if RAW_SALE_PRICE else ''
+            ORIGINAL_PRICE = ''.join(''.join(RAW_ORIGINAL_PRICE).replace("$", "")).strip() if RAW_ORIGINAL_PRICE else ''
             AVAILABILITY = ''.join(RAW_AVAILABILITY).strip() if RAW_AVAILABILITY else ''
-            OFFER_PRICE = ''.join(RAW_OFFER_PRICE[0]).strip() if RAW_OFFER_PRICE else ''
-            NUM_REVIEWS = ''.join(''.join(RAW_NUM_REVIEWS).split(' ')[0]) if RAW_NUM_REVIEWS else ''
+            OFFER_PRICE = ''.join(''.join(RAW_OFFER_PRICE[0]).replace("$", "")).strip() if RAW_OFFER_PRICE else ''
+            NUM_REVIEWS = ''.join(''.join(''.join(RAW_NUM_REVIEWS).split(' ')[0]).replace(",", "")) if RAW_NUM_REVIEWS else ''
             RATING = ''.join(''.join(RAW_RATING).split(' ')[0]) if RAW_RATING else ''
 
             if ORIGINAL_PRICE == '':
@@ -47,7 +47,7 @@ def AmzonParser(url):
                     'product':NAME,
                     'salePrice':SALE_PRICE,
                     'originalPrice':ORIGINAL_PRICE,
-                    'url':url,
+                    'asin':asin,
                     'numReviews':NUM_REVIEWS,
                     'rating':RATING,
                     }
@@ -58,7 +58,7 @@ def AmzonParser(url):
  
 def ReadAsin(ASIN):
     url = "http://www.amazon.com/dp/"+ASIN
-    product_data = AmzonParser(url)
+    product_data = AmzonParser(url, ASIN)
     f=open('data.json','w')
     json.dump(product_data,f,indent=4)
  

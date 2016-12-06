@@ -22,6 +22,10 @@
         "@timestamp": {
           "type": "date"
         },
+        "asin": {
+          "norms": false,
+          "type": "text"
+        },
         "beat": {
           "properties": {
             "hostname": {
@@ -71,32 +75,24 @@
           }
         },
         "numreviews": {
-          "norms": false,
-          "type": "text"
+          "type": "long"
         },
         "originalprice": {
-          "norms": false,
-          "type": "text"
+          "type": "float"
         },
         "product": {
           "norms": false,
           "type": "text"
         },
         "rating": {
-          "norms": false,
-          "type": "text"
+          "type": "float"
         },
         "saleprice": {
-          "norms": false,
-          "type": "text"
+          "type": "float"
         },
         "tags": {
           "ignore_above": 1024,
           "type": "keyword"
-        },
-        "url": {
-          "norms": false,
-          "type": "text"
         }
       }
     }

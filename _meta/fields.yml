@@ -5,12 +5,13 @@
     - name: product
       type: text
     - name: saleprice
-      type: text
+      type: float
     - name: originalprice
-      type: text
-    - name: url
+      type: float
+    - name: asin
       type: text
     - name: numreviews
-      type: text
+      type: integer
     - name: rating
-      type: text
+      type: float
+      

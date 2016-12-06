@@ -25,6 +25,13 @@
         "@timestamp": {
           "type": "date"
         },
+        "asin": {
+          "index": "analyzed",
+          "norms": {
+            "enabled": false
+          },
+          "type": "string"
+        },
         "beat": {
           "properties": {
             "hostname": {
@@ -83,18 +90,10 @@
           }
         },
         "numreviews": {
-          "index": "analyzed",
-          "norms": {
-            "enabled": false
-          },
-          "type": "string"
+          "type": "long"
         },
         "originalprice": {
-          "index": "analyzed",
-          "norms": {
-            "enabled": false
-          },
-          "type": "string"
+          "type": "float"
         },
         "product": {
           "index": "analyzed",
@@ -104,29 +103,14 @@
           "type": "string"
         },
         "rating": {
-          "index": "analyzed",
-          "norms": {
-            "enabled": false
-          },
-          "type": "string"
+          "type": "float"
         },
         "saleprice": {
-          "index": "analyzed",
-          "norms": {
-            "enabled": false
-          },
-          "type": "string"
+          "type": "float"
         },
         "tags": {
           "ignore_above": 1024,
           "index": "not_analyzed",
-          "type": "string"
-        },
-        "url": {
-          "index": "analyzed",
-          "norms": {
-            "enabled": false
-          },
           "type": "string"
         }
       }

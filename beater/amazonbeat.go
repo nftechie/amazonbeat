@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"encoding/json"
 	"io/ioutil"
+	"strconv"
 
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
@@ -27,7 +28,7 @@ type ProductData struct {
 	Name string `json:"product"`
 	SalePrice string `json:"salePrice"`
 	OriginalPrice string `json:"originalPrice"`
-	URL string `json:"url"`
+	ASIN string `json:"asin"`
 	NumReviews string `json:"numReviews"`
 	Rating string `json:"rating"`
 }
@@ -95,26 +96,25 @@ func (bt *Amazonbeat) Run(b *beat.Beat) error {
 			return nil
 		}
 
+		// Convert strings to appropriate data types before sending to ElasticSearch.
+		salePrice, _ := strconv.ParseFloat(productData.SalePrice, 64)
+		originalPrice, _ := strconv.ParseFloat(productData.OriginalPrice, 64)
+		numReviews, _ := strconv.ParseUint(productData.NumReviews, 0, 64)
+    	rating, _ := strconv.ParseFloat(productData.Rating, 64)
+
 		event := common.MapStr{
 			"@timestamp":    common.Time(now),
 			"type":          b.Name,
 			"product":       productData.Name,
-			"saleprice":     productData.SalePrice,
-			"originalprice": productData.OriginalPrice,
-			"url":           productData.URL,
-			"numreviews":    productData.NumReviews,
-			"rating":        productData.Rating,
+			"saleprice":     salePrice,
+			"originalprice": originalPrice,
+			"asin":          productData.ASIN,
+			"numreviews":    numReviews,
+			"rating":        rating,
 		}
-		fmt.Println(event)
 
-		// TODO: Properly export this data to ElasticSearch.
-		// bt.client.PublishEvent(event)
-		// logp.Info("Event sent")
-
-		// BUG: When the above code executes, elasticsearch throws the following error:
-		// org.elasticsearch.index.mapper.MapperParsingException: failed to parse [numreviews]
-		// Caused by: java.lang.NumberFormatException: For input string: "2,511"
-		// at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65) ~[?:1.8.0_111]
+		bt.client.PublishEvent(event)
+		logp.Info("Event sent")
 	}
 }
 

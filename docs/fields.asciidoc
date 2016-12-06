@@ -31,27 +31,27 @@ type: text
 [float]
 === saleprice
 
-type: text
+type: float
 
 [float]
 === originalprice
 
-type: text
+type: float
 
 [float]
-=== url
+=== asin
 
 type: text
 
 [float]
 === numreviews
 
-type: text
+type: integer
 
 [float]
 === rating
 
-type: text
+type: float
 
 [[exported-fields-beat]]
 == Beat Fields
