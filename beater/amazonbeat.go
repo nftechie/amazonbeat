@@ -100,7 +100,7 @@ func (bt *Amazonbeat) Run(b *beat.Beat) error {
 		salePrice, _ := strconv.ParseFloat(productData.SalePrice, 64)
 		originalPrice, _ := strconv.ParseFloat(productData.OriginalPrice, 64)
 		numReviews, _ := strconv.ParseUint(productData.NumReviews, 0, 64)
-    	rating, _ := strconv.ParseFloat(productData.Rating, 64)
+		rating, _ := strconv.ParseFloat(productData.Rating, 64)
 
 		event := common.MapStr{
 			"@timestamp":    common.Time(now),
