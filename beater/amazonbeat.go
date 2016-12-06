@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 	"os"
-    "os/exec"
-    "path/filepath"
-    "encoding/json"
-    "io/ioutil"
+	"os/exec"
+	"path/filepath"
+	"encoding/json"
+	"io/ioutil"
 
 	"github.com/elastic/beats/libbeat/beat"
 	"github.com/elastic/beats/libbeat/common"
@@ -51,24 +51,24 @@ func (bt *Amazonbeat) readAmazonData(asin string) (ProductData, error) {
 
 	// Get filepath for currently running script.
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-    if err != nil { 
-    	return productData, err 
-    }
+	if err != nil { 
+		return productData, err 
+	}
 
-    // Execute python script that pulls amazon product data.
+	// Execute python script that pulls amazon product data.
 	cmd := exec.Command("python", dir + "/readAmazonData.py", asin)
-    err = cmd.Run()
-    if err != nil { 
-    	return productData, err 
-    }
+	err = cmd.Run()
+	if err != nil { 
+		return productData, err 
+	}
 
-    // Read data.json file into ProductData struct.
-    raw, err := ioutil.ReadFile(dir + "/data.json")
-    if err != nil {
-        return productData, err 
-    }
+	// Read data.json file into ProductData struct.
+	raw, err := ioutil.ReadFile(dir + "/data.json")
+	if err != nil {
+		return productData, err 
+	}
 
-    err = json.Unmarshal(raw, &productData)
+	err = json.Unmarshal(raw, &productData)
 	if err != nil {
 		return productData, err
 	}
@@ -98,7 +98,7 @@ func (bt *Amazonbeat) Run(b *beat.Beat) error {
 		event := common.MapStr{
 			"@timestamp":    common.Time(now),
 			"type":          b.Name,
-			"product":          productData.Name,
+			"product":       productData.Name,
 			"saleprice":     productData.SalePrice,
 			"originalprice": productData.OriginalPrice,
 			"url":           productData.URL,
