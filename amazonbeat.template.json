@@ -38,9 +38,6 @@
             }
           }
         },
-        "counter": {
-          "type": "long"
-        },
         "meta": {
           "properties": {
             "cloud": {
@@ -73,9 +70,33 @@
             }
           }
         },
+        "numreviews": {
+          "norms": false,
+          "type": "text"
+        },
+        "originalprice": {
+          "norms": false,
+          "type": "text"
+        },
+        "product": {
+          "norms": false,
+          "type": "text"
+        },
+        "rating": {
+          "norms": false,
+          "type": "text"
+        },
+        "saleprice": {
+          "norms": false,
+          "type": "text"
+        },
         "tags": {
           "ignore_above": 1024,
           "type": "keyword"
+        },
+        "url": {
+          "norms": false,
+          "type": "text"
         }
       }
     }

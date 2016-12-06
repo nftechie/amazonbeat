@@ -2,8 +2,15 @@
   title: amazonbeat
   description:
   fields:
-    - name: counter
-      type: long
-      required: true
-      description: >
-        PLEASE UPDATE DOCUMENTATION
+    - name: product
+      type: text
+    - name: saleprice
+      type: text
+    - name: originalprice
+      type: text
+    - name: url
+      type: text
+    - name: numreviews
+      type: text
+    - name: rating
+      type: text

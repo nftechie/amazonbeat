@@ -4,4 +4,6 @@
 
 amazonbeat:
   # Defines how often an event is sent to the output
-  period: 1s
+  period: 10s
+  # Defines an ASIN (Amazon Standard Identification Number)
+  asin: B00ZV9PXP2

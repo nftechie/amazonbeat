@@ -24,14 +24,34 @@ None
 
 
 [float]
-=== counter
+=== product
 
-type: long
+type: text
 
-required: True
+[float]
+=== saleprice
 
-PLEASE UPDATE DOCUMENTATION
+type: text
 
+[float]
+=== originalprice
+
+type: text
+
+[float]
+=== url
+
+type: text
+
+[float]
+=== numreviews
+
+type: text
+
+[float]
+=== rating
+
+type: text
 
 [[exported-fields-beat]]
 == Beat Fields

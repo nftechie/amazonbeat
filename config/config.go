@@ -7,8 +7,10 @@ import "time"
 
 type Config struct {
 	Period time.Duration `config:"period"`
+	ASIN string `config:"asin"`
 }
 
 var DefaultConfig = Config{
 	Period: 1 * time.Second,
+	ASIN: "B00ZV9PXP2",
 }
